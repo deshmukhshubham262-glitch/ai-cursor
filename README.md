@@ -19,6 +19,12 @@ Control the desktop pointer with a webcam and one hand. The app uses OpenCV for 
 
 Use `py virtual_mouse.py --camera 1` if your webcam is not camera 0. Press `Q` or `Esc` to exit. Moving the physical pointer to a screen corner also triggers PyAutoGUI's emergency stop.
 
+## Render deployment
+
+Create a new Render Blueprint from this repository and select `render.yaml`. Render will install the dependencies and start the Streamlit page automatically.
+
+The hosted page is informational only: Render cannot access your webcam, display, or desktop mouse. Run the project locally for gesture control.
+
 ## Gestures
 
 | Gesture | Action |
