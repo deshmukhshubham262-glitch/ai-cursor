@@ -9,7 +9,18 @@ from dataclasses import dataclass
 
 import cv2
 import mediapipe as mp
-import pyautogui
+
+
+def running_under_streamlit() -> bool:
+    try:
+        from streamlit.runtime.scriptrunner import get_script_run_ctx
+    except ImportError:
+        return False
+    return get_script_run_ctx() is not None
+
+
+if not running_under_streamlit():
+    import pyautogui
 
 
 @dataclass
@@ -172,11 +183,18 @@ def parse_args() -> Settings:
 
 
 if __name__ == "__main__":
-    pyautogui.FAILSAFE = True
-    try:
-        VirtualMouse(parse_args()).run()
-    except KeyboardInterrupt:
-        pass
-    except Exception as error:
-        print(f"Error: {error}", file=sys.stderr)
-        sys.exit(1)
+    if running_under_streamlit():
+        import streamlit as st
+
+        st.title("AI Virtual Mouse")
+        st.warning("Run this app locally to use your webcam and control your desktop mouse.")
+        st.write("Streamlit Cloud does not provide access to your webcam, display, or desktop pointer.")
+    else:
+        pyautogui.FAILSAFE = True
+        try:
+            VirtualMouse(parse_args()).run()
+        except KeyboardInterrupt:
+            pass
+        except Exception as error:
+            print(f"Error: {error}", file=sys.stderr)
+            sys.exit(1)
