@@ -21,7 +21,7 @@ Use `py virtual_mouse.py --camera 1` if your webcam is not camera 0. Press `Q` o
 
 ## Render deployment
 
-Create a new Render Blueprint from this repository and select `render.yaml`. Render will install the dependencies and start the Streamlit page automatically.
+Create a new Render Blueprint from this repository and select `render.yaml`. Render will install the dependencies and start the web health page automatically.
 
 The hosted page is informational only: Render cannot access your webcam, display, or desktop mouse. Run the project locally for gesture control.
 
